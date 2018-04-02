@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<style>
+			html {
+				width: 100%;
+				height: 100%;
+			}
+			body, h2, p {	
+				padding: 0;
+				margin: 0;
+			}
+			body {
+				width: 100%;
+				height: 100%;
+				font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
+                background-size: cover;
+                background-repeat: no-repeat;
+			}
+			#root {
+				width: 100%;
+				height: 100%;
+				background-size: 100% 100%;
+				overflow: hidden;
+			}
+			.team-inf {
+				width: 180px;
+				position: absolute;
+				float: left;
+			}
+			.team-inf h2 {
+				width: 100%;
+				height: 34px;
+				line-height: 34px;
+				text-align: center;
+				font-weight: bold;
+			}
+			.team-inf .triangle-out {
+				width: 100%;
+				height: 30px;
+				position: relative;
+				overflow: hidden;
+			}
+			.team-inf .triangle-up {
+				position: absolute;
+				top: -110px;
+				width: 0;
+				height: 0;
+				border-left: 90px solid transparent;
+				border-right: 90px solid transparent;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id='root'></div>
+		<script>
+			var config = {
+                bg: './static/imgs/bg.jpg',
+				team: [{
+					name: '正方辩论队的名字',
+					opinion: '正方辩论队论题'
+				},{
+					name: '反方辩论队名字',
+					opinion: '反方辩论队论题'
+				}],
+				inf: [{
+                    name: '正方立论',
+                    // 图片有三种形式：
+                    //     1. imgA: '' 空字符串：显示颜色
+                    //     2. imgA: 'xxx.png' 字符串表示路径，显示单张照片
+                    //     3. imgA: ['', '', '', ''] 长度为 4 的数组（必须为4）团队照片
+					imgA: './static/imgs/team_a/正方一辩王丹頔.jpg',
+                    imgB: '',
+                    // timerA 正方时间
+                    // timerB 反方时间
+                    // allTimer 双方加起来的总时间
+					timerA: '180',
+					timerB: '',
+					allTimer: '180'
+				},{
+					name: '反方质询', 
+					imgA: './static/imgs/team_a/正方一辩王丹頔.jpg',
+					imgB: './static/imgs/team_b/反方四辩刘一枫.jpg',
+					timerA: '90',
+					timerB: '90',
+					allTimer: '90'
+				},{
+					name: '反方立论',
+					imgA: '',
+					imgB: './static/imgs/team_b/反方一辩刘淦.jpg',
+					timerA: '',
+					timerB: '180',
+					allTimer: '180'
+				},{
+					name: '正方质询', 
+					imgA: './static/imgs/team_a/正方四辩李阳.jpg',
+					imgB: './static/imgs/team_b/反方一辩刘淦.jpg',
+					timerA: '90',
+					timerB: '90',
+					allTimer: '90'
+				},{
+					name: '反方驳辩',
+					imgA: '',
+					imgB: './static/imgs/team_b/反方二辩陈采薇.jpg',
+					timerA: '',
+					timerB: '120',
+					allTimer: '120'
+				},{
+					name: '正方驳辩',
+					imgA: './static/imgs/team_a/正方二辩黄旭茵.jpg',
+					imgB: '',
+					timerA: '120',
+					timerB: '',
+					allTimer: '120'
+				},{
+					name: '对辩',
+					imgA: './static/imgs/team_a/正方四辩李阳.jpg',
+                    imgB: './static/imgs/team_b/反方四辩刘一枫.jpg',
+					timerA: '90',
+					timerB: '90',
+					allTimer: '180'
+				},{
+					name: '正方盘问', 
+					imgA: './static/imgs/team_a/正方三辩赵齐.jpg',
+					imgB: './static/imgs/team_b/反方一二四.jpg',
+					timerA: '150',
+					timerB: '150',
+					allTimer: '150',
+				},{
+					name: '反方盘问', 
+					imgA: './static/imgs/team_a/正方一二四.jpg',
+					imgB: './static/imgs/team_b/反方三辩郭祎名.jpg',
+					timerA: '150',
+					timerB: '150',
+					allTimer: '150',
+				},{
+					name: '正方小结',
+					imgA: './static/imgs/team_a/正方三辩赵齐.jpg',
+					imgB: '',
+					timerA: '90',
+					timerB: '',
+					allTimer: '90'
+				},{
+					name: '反方小结',
+					imgA: '',
+					imgB: './static/imgs/team_b/反方三辩郭祎名.jpg',
+					timerA: '',
+					timerB: '90',
+					allTimer: '90'
+				},{
+                    name: '自由辩论',
+                    // 示例：四张照片
+					imgA: [
+                        './static/imgs/team_a/正方合照.jpg',
+                        './static/imgs/team_a/正方合照.jpg',
+                        './static/imgs/team_a/正方合照.jpg',
+                        './static/imgs/team_a/正方合照.jpg'
+                    ],
+					imgB: [
+                        './static/imgs/team_b/反方合照.jpg',
+                        './static/imgs/team_b/反方合照.jpg',
+                        './static/imgs/team_b/反方合照.jpg',
+                        './static/imgs/team_b/反方合照.jpg'
+                    ],
+					timerA: '240',
+					timerB: '240',
+					allTimer: '480'
+				},{
+					name: '反方总结',
+					imgA: '',
+					imgB: './static/imgs/team_b/反方四辩刘一枫.jpg',
+					timerA: '',
+					timerB: '210',
+					allTimer: '210'
+				},{
+					name: '正方总结',
+					imgA: './static/imgs/team_a/正方四辩李阳.jpg',
+					imgB: '',
+					timerA: '210',
+					timerB: '',
+					allTimer: '210'
+				}],
+				ev: [{
+					id: 1,
+					name: '质询',
+					time: '120',
+					spec: true
+				},{
+					id: 2,
+					name: '申论',
+					time: '90',
+					spec: true
+				}]
+			};
+
+			for (var i = 0; i < config.inf.length; i++) {
+				if (config.inf[i].timerA && config.inf[i].timerA.indexOf('.') < 0) {
+					if (!isNaN(Number(config.inf[i].timerA))) {
+						config.inf[i].timerA += '.0';
+					}
+				}
+				if (config.inf[i].timerB && config.inf[i].timerB.indexOf('.') < 0) {
+					if (!isNaN(Number(config.inf[i].timerB))) {
+						config.inf[i].timerB += '.0';
+					}
+				}
+				if (config.inf[i].allTimer && config.inf[i].allTimer.indexOf('.') < 0) {
+					config.inf[i].allTimer += '.0';
+				}
+            }
+
+            document.body.setAttribute('style', "background-image: url('" + config.bg + "')");
+		</script>
+	</body>
+</html>
