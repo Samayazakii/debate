@@ -28,14 +28,19 @@ let GetStart = React.createClass({
 		return (
 			<section>
 				<div style={{
-					background: `url(${require('../static/imgs/title.png')}) no-repeat`,
 					width: '747px',
 					position: 'absolute',
 					left: this.state.hidden?'-747px':(window.innerWidth - 747)/2 + 'px',
 					top: '240px',
 					height: '148px',
-					transition: 'left 0.6s'
+					transition: 'left 0.6s',
+					textAlign: 'center'
 				}}>
+				<p style={{
+					fontSize: '60px',
+					color: '#ffcc66',
+					fontWeight: '600'
+				}}>2018 华语辩论世界杯</p>
 				</div>
 				<div ref='button'
 					onClick={this.handleClick}

@@ -6,13 +6,13 @@ let Title = React.createClass({
 			<h1 style={{
 				color: '#fff',
 				textAlign: 'center',
-				fontSize: '30px'
+				fontSize: '26px'
 			}}>
-				金士顿 | <img src={require('../static/imgs/logo.png')}
+				华语辩论世界杯 | <img src={require('../static/imgs/logo.png')}
 					style={{
 						position: 'relative',
 						width: '150px',
-						top: '35px'
+						top: '15px'
 					}}
 				/>
 			</h1>

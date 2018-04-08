@@ -6,9 +6,9 @@ let TitleBottom = React.createClass({
 			<p style={{
 				color: '#c1c0c6',
 				textAlign: 'center',
-				marginTop: '-20px'
+				marginTop: '-10px'
 			}}>
-				We're all gamers
+					One Word, One World
 			</p>
 		)
 	}

@@ -275,11 +275,11 @@ let ChangeSecton = React.createClass({
 						changeEvTimer={this.state.evTimer}
 						timerA={config.inf[count].timerA}
 						timerB={config.inf[count].timerB} />
-					{/* 下方两个按钮 */}
-					<div onClick={this.handleSpecEvent}>
+					{/* 下方两个按钮 不要就关掉 */}
+					{/* <div onClick={this.handleSpecEvent}>
 						<SpecEvent type={0}/>
 						<SpecEvent type={1}/>
-					</div>
+					</div> */}
 				</div>
 				{/* 右边队伍信息 */}
 				<TeamInf count={this.state.count}
