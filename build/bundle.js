@@ -10141,43 +10141,54 @@ var ChangeSecton = _react2.default.createClass({
 	},
 	startTimer: function startTimer(inf, value) {
 		var self = this;
+		var startTimestamp = new Date().getTime();
+		var startTimerA = self.state.timerA;
+		var startTimerB = self.state.timerB;
+		var startAllTimer = self.state.allTimer;
 
 		this.timer = setInterval(function () {
+			var timePassed = parseFloat(((new Date().getTime() - startTimestamp) / 1000).toFixed(1));
+
+			console.log(startTimerA, startTimerB, startAllTimer, timePassed);
+
 			if (inf.unlimited) {
 				if (inf.timerA == inf.allTimer) {
 					if (value == 0 && self.state.timerA > 0) {
-						self.state.timerA = handleNumber(self.state.timerA - 0.1);
-						self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+						self.state.timerA = handleNumber(startTimerA - timePassed);
+						self.state.allTimer = handleNumber(startAllTimer - timePassed);
 					}
+
 					self.setState({
 						timerA: self.state.timerA,
 						allTimer: self.state.allTimer
 					});
 				} else {
 					if (value == 1 && self.state.timerB > 0) {
-						self.state.timerB = handleNumber(self.state.timerB - 0.1);
-						self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+						self.state.timerB = handleNumber(startTimerB - timePassed);
+						self.state.allTimer = handleNumber(startAllTimer - timePassed);
 					}
 					self.setState({
 						timerB: self.state.timerB,
 						allTimer: self.state.allTimer
 					});
 				}
-				//...............特殊事件..............
 			} else if (inf.spec) {
+				// 特殊事件
 				if (self.state.allTimer > 0) {
-					self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+					self.state.allTimer = handleNumber(startAllTimer - timePassed);
 				}
+
 				self.setState({
 					allTimer: self.state.allTimer,
 					evTimer: self.state.allTimer
 				});
-				//...............双方有共同事件..............
 			} else if (inf.timerA == inf.timerB && inf.timerB == inf.allTimer) {
+				// 三个 timer 相同的事件
 				if (self.state.timerA > 0) {
-					self.state.timerA = handleNumber(self.state.timerA - 0.1);
-					self.state.timerB = handleNumber(self.state.timerB - 0.1);
-					self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+					self.state.timerA = handleNumber(startTimerA - timePassed);
+					self.state.timerB = handleNumber(startTimerB - timePassed);
+					self.state.allTimer = handleNumber(startAllTimer - timePassed);
+
 					self.setState({
 						timerA: self.state.timerA,
 						timerB: self.state.timerB,
@@ -10185,13 +10196,12 @@ var ChangeSecton = _react2.default.createClass({
 					});
 				}
 			} else if (inf.timerA == inf.timerB && inf.allTimer == inf.timerA * 2) {
-				// 自由辩论
-
+				// 自由辩论环节
 				if (value == 0) {
 					if (self.state.timerA > 0) {
-						//console.log(handleNumber(self.state.timerA - 0.1) + '----',handleNumber(self.state.allTimer - 0.1));
-						self.state.timerA = handleNumber(self.state.timerA - 0.1);
-						self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+						self.state.timerA = handleNumber(startTimerA - timePassed);
+						self.state.allTimer = handleNumber(startAllTimer - timePassed);
+
 						self.setState({
 							timerA: self.state.timerA,
 							allTimer: self.state.allTimer
@@ -10202,43 +10212,44 @@ var ChangeSecton = _react2.default.createClass({
 							stop: 0
 						});
 						self.clearTimer();
-						// self.startTimer(inf,1);	
 					}
 				} else if (value == 1) {
 					if (self.state.timerB > 0) {
-						self.state.timerB = handleNumber(self.state.timerB - 0.1);
-						self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+						self.state.timerB = handleNumber(startTimerB - timePassed);
+						self.state.allTimer = handleNumber(startAllTimer - timePassed);
 						self.setState({
 							timerB: self.state.timerB,
 							allTimer: self.state.allTimer
 						});
 					} else {
 						// 反方时间到
-						self.setState({ stop: 0 });
+						self.setState({
+							stop: 0
+						});
 						self.clearTimer();
 					}
 				}
 			} else {
 				// 单方辩论
-
 				if (value == 0 && self.state.timerA > 0) {
-					self.state.timerA = handleNumber(self.state.timerA - 0.1);
-					self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+					self.state.timerA = handleNumber(startTimerA - timePassed);
+					self.state.allTimer = handleNumber(startAllTimer - timePassed);
+
 					self.setState({
 						timerA: self.state.timerA,
 						allTimer: self.state.allTimer
 					});
 				} else if (value == 1 && self.state.timerB > 0) {
-					self.state.timerB = handleNumber(self.state.timerB - 0.1);
-					self.state.allTimer = handleNumber(self.state.allTimer - 0.1);
+					self.state.timerB = handleNumber(startTimerB - timePassed);
+					self.state.allTimer = handleNumber(startAllTimer - timePassed);
+
 					self.setState({
 						timerB: self.state.timerB,
 						allTimer: self.state.allTimer
 					});
 				}
 			}
-		}, 100);
-		// }, 5);
+		}, 20);
 	},
 	clearTimer: function clearTimer() {
 		clearInterval(this.timer);
@@ -10644,7 +10655,7 @@ var Count = _react2.default.createClass({
 			} else if ((self.props.timerA == 0.1 || self.props.timerB == 0.1 || self.props.evTimer == 0.1) && self.props.time == '0s') {
 				self.handleAudio();
 			}
-		}, 100);
+		}, 20);
 	},
 	render: function render() {
 		return _react2.default.createElement(

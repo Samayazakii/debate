@@ -16,7 +16,7 @@ let Count = React.createClass({
 	    	} else if ((self.props.timerA == 0.1 || self.props.timerB == 0.1 || self.props.evTimer == 0.1) && self.props.time == '0s') {
 	    		self.handleAudio();
 	    	}
-	    },100);
+	    }, 20);
 	},
 	render () {
 		return (
